@@ -1,0 +1,12 @@
+dwconfig.php
+test.php
+example.php
+documents/
+vendor/
+composer.lock
+tmp/*
+.idea*
+.idea/
+*.DS_Store
+test/connection.php
+examples/connection.php

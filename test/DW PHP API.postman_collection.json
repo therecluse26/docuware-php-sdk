@@ -1,0 +1,1010 @@
+{
+	"info": {
+		"_postman_id": "a85d2c9a-8099-42d5-b32c-530c92594929",
+		"name": "DW PHP API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Organization",
+			"item": [
+				{
+					"name": "Get Info",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9b6b2181-44ee-4375-ad76-1b02abd5306d",
+								"exec": [
+									"pm.test(\"Response successful\", function () {",
+									"    pm.response.to.be.success",
+									"});",
+									"",
+									"pm.test(\"Content-Type is json\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\", \"application/json\");",
+									"});",
+									"",
+									"pm.test(\"Response has body\", function () {",
+									"    pm.response.to.have.body();",
+									"})",
+									"",
+									"pm.test(\"Response data is correct\", function () {",
+									"    pm.response.to.have.jsonBody(\"@attributes\");",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/test/organization/getinfo.php",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"test",
+								"organization",
+								"getinfo.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Dialogs",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9b6b2181-44ee-4375-ad76-1b02abd5306d",
+								"exec": [
+									"pm.test(\"Response successful\", function () {",
+									"    pm.response.to.be.success",
+									"});",
+									"",
+									"pm.test(\"Content-Type is json\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\", \"application/json\");",
+									"});",
+									"",
+									"pm.test(\"Response has body\", function () {",
+									"    pm.response.to.have.body();",
+									"})",
+									"",
+									"pm.test(\"Response data is correct\", function () {",
+									"    pm.response.to.have.jsonBody(\"Dialog\");",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/test/organization/dialogs.php",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"test",
+								"organization",
+								"dialogs.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Groups",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9b6b2181-44ee-4375-ad76-1b02abd5306d",
+								"exec": [
+									"pm.test(\"Response successful\", function () {",
+									"    pm.response.to.be.success",
+									"});",
+									"",
+									"pm.test(\"Content-Type is json\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\", \"application/json\");",
+									"});",
+									"",
+									"pm.test(\"Response has body\", function () {",
+									"    pm.response.to.have.body();",
+									"})",
+									"",
+									"pm.test(\"Response data is correct\", function () {",
+									"    pm.response.to.have.jsonBody(\"Item\");",
+									"    var jsonData = JSON.parse(responseBody);",
+									"    var groups = null;",
+									"",
+									"    if (!jsonData.Item[0]){",
+									"        groups = jsonData.Item[\"@attributes\"].Id;",
+									"    } else {",
+									"        groups = jsonData.Item[0][\"@attributes\"].Id",
+									"    }",
+									"",
+									"    postman.setEnvironmentVariable(\"DW_Organization_Groups\", groups);",
+									"})",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/test/organization/groups.php",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"test",
+								"organization",
+								"groups.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Roles",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9b6b2181-44ee-4375-ad76-1b02abd5306d",
+								"exec": [
+									"pm.test(\"Response successful\", function () {",
+									"    pm.response.to.be.success",
+									"});",
+									"",
+									"pm.test(\"Content-Type is json\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\", \"application/json\");",
+									"});",
+									"",
+									"pm.test(\"Response has body\", function () {",
+									"    pm.response.to.have.body();",
+									"})",
+									"",
+									"pm.test(\"Response data is correct\", function () {",
+									"    pm.response.to.have.jsonBody(\"Item\");",
+									"    var jsonData = JSON.parse(responseBody);",
+									"    var roles = jsonData.Item[0][\"@attributes\"].Id;",
+									"    ",
+									"    if (!jsonData.Item[0]){",
+									"        roles = jsonData.Item[\"@attributes\"].Id;",
+									"    } else {",
+									"        roles = jsonData.Item[0][\"@attributes\"].Id",
+									"    }",
+									"    ",
+									"    postman.setEnvironmentVariable(\"DW_Organization_Roles\", roles);",
+									"})",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/test/organization/roles.php",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"test",
+								"organization",
+								"roles.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Select LIsts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9b6b2181-44ee-4375-ad76-1b02abd5306d",
+								"exec": [
+									"pm.test(\"Response successful\", function () {",
+									"    pm.response.to.be.success",
+									"});",
+									"",
+									"pm.test(\"Content-Type is json\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\", \"application/json\");",
+									"});",
+									"",
+									"pm.test(\"Response has body\", function () {",
+									"    pm.response.to.have.body();",
+									"})",
+									"",
+									"pm.test(\"Response data is correct\", function () {",
+									"    pm.response.to.have.jsonBody(\"SelectLists\");",
+									"    var jsonData = JSON.parse(responseBody);",
+									"    ",
+									"    var res = jsonData.SelectLists[0][\"@attributes\"].Guid;",
+									"    ",
+									"    if (!jsonData.SelectLists[0]){",
+									"        res = jsonData.SelectLists[\"@attributes\"].Guid;",
+									"    } else {",
+									"        res = jsonData.SelectLists[0][\"@attributes\"].Guid",
+									"    }",
+									"    ",
+									"    postman.setEnvironmentVariable(\"DW_Organization_SelectLists\", res);",
+									"})",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/test/organization/selectlists.php",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"test",
+								"organization",
+								"selectlists.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Group Info",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9b6b2181-44ee-4375-ad76-1b02abd5306d",
+								"exec": [
+									"pm.test(\"Response successful\", function () {",
+									"    pm.response.to.be.success",
+									"});",
+									"",
+									"pm.test(\"Content-Type is json\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\", \"application/json\");",
+									"});",
+									"",
+									"pm.test(\"Response has body\", function () {",
+									"    pm.response.to.have.body();",
+									"})",
+									"",
+									"pm.test(\"Response data is correct\", function () {",
+									"    pm.response.to.have.jsonBody(\"@attributes\");",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/test/organization/group.php?id={{DW_Organization_Groups}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"test",
+								"organization",
+								"group.php"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{DW_Organization_Groups}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Select List Values",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9b6b2181-44ee-4375-ad76-1b02abd5306d",
+								"exec": [
+									"pm.test(\"Response successful\", function () {",
+									"    pm.response.to.be.success",
+									"});",
+									"",
+									"pm.test(\"Content-Type is json\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\", \"application/json\");",
+									"});",
+									"",
+									"pm.test(\"Response has body\", function () {",
+									"    pm.response.to.have.body();",
+									"})",
+									"",
+									"pm.test(\"Response data is correct\", function () {",
+									"    pm.response.to.have.jsonBody(\"SingleColumn\");",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/test/organization/selectlistvalues.php?id={{DW_Organization_SelectLists}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"test",
+								"organization",
+								"selectlistvalues.php"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{DW_Organization_SelectLists}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Group Users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9b6b2181-44ee-4375-ad76-1b02abd5306d",
+								"exec": [
+									"pm.test(\"Response successful\", function () {",
+									"    pm.response.to.be.success",
+									"});",
+									"",
+									"pm.test(\"Content-Type is json\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\", \"application/json\");",
+									"});",
+									"",
+									"pm.test(\"Response has body\", function () {",
+									"    pm.response.to.have.body();",
+									"})",
+									"",
+									"pm.test(\"Response data is correct\", function () {",
+									"    pm.response.to.have.jsonBody(\"User\");",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/test/organization/groupusers.php?id={{DW_Organization_Groups}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"test",
+								"organization",
+								"groupusers.php"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{DW_Organization_Groups}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Role Users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9b6b2181-44ee-4375-ad76-1b02abd5306d",
+								"exec": [
+									"pm.test(\"Response successful\", function () {",
+									"    pm.response.to.be.success",
+									"});",
+									"",
+									"pm.test(\"Content-Type is json\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\", \"application/json\");",
+									"});",
+									"",
+									"pm.test(\"Response has body\", function () {",
+									"    pm.response.to.have.body();",
+									"})",
+									"",
+									"pm.test(\"Response data is correct\", function () {",
+									"    pm.response.to.have.jsonBody(\"User\");",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/test/organization/roleusers.php?id={{DW_Organization_Roles}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"test",
+								"organization",
+								"roleusers.php"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{DW_Organization_Roles}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Role",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9b6b2181-44ee-4375-ad76-1b02abd5306d",
+								"exec": [
+									"pm.test(\"Response successful\", function () {",
+									"    pm.response.to.be.success",
+									"});",
+									"",
+									"pm.test(\"Content-Type is json\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\", \"application/json\");",
+									"});",
+									"",
+									"pm.test(\"Response has body\", function () {",
+									"    pm.response.to.have.body();",
+									"})",
+									"",
+									"pm.test(\"Response data is correct\", function () {",
+									"    pm.response.to.have.jsonBody(\"@attributes\");",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/test/organization/role.php?id={{DW_Organization_Roles}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"test",
+								"organization",
+								"role.php"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{DW_Organization_Roles}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Select List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9b6b2181-44ee-4375-ad76-1b02abd5306d",
+								"exec": [
+									"pm.test(\"Response successful\", function () {",
+									"    pm.response.to.be.success",
+									"});",
+									"",
+									"pm.test(\"Content-Type is json\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\", \"application/json\");",
+									"});",
+									"",
+									"pm.test(\"Response has body\", function () {",
+									"    pm.response.to.have.body();",
+									"})",
+									"",
+									"pm.test(\"Response data is correct\", function () {",
+									"    pm.response.to.have.jsonBody(\"@attributes\");",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/test/organization/selectlist.php?id={{DW_Organization_SelectLists}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"test",
+								"organization",
+								"selectlist.php"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{DW_Organization_SelectLists}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Web Settings",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4f5872be-08da-4e2e-a8d8-30abdb8c2a78",
+								"exec": [
+									"pm.test(\"Response successful\", function () {",
+									"    pm.response.to.be.success",
+									"});",
+									"",
+									"pm.test(\"Content-Type is json\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\", \"application/json\");",
+									"});",
+									"",
+									"pm.test(\"Response has body\", function () {",
+									"    pm.response.to.have.body();",
+									"})",
+									"",
+									"pm.test(\"Response data is correct\", function () {",
+									"    pm.response.to.have.jsonBody(\"ApplicationPreferences\");",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/test/organization/websettings.php",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"test",
+								"organization",
+								"websettings.php"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "File Cabinets",
+			"item": [
+				{
+					"name": "Get All",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9b6b2181-44ee-4375-ad76-1b02abd5306d",
+								"exec": [
+									"pm.test(\"Response successful\", function () {",
+									"    pm.response.to.be.success",
+									"});",
+									"",
+									"pm.test(\"Content-Type is json\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\", \"application/json\");",
+									"});",
+									"",
+									"pm.test(\"Response has body\", function () {",
+									"    pm.response.to.have.body();",
+									"})",
+									"",
+									"pm.test(\"Response data is correct\", function () {",
+									"    pm.response.to.have.jsonBody(\"FileCabinet\");",
+									"    var jsonData = JSON.parse(responseBody);",
+									"    var id = null;",
+									"    var name = null;",
+									"    ",
+									"    if (!jsonData.FileCabinet[0]){",
+									"        id = jsonData.FileCabinet[\"@attributes\"].Id;",
+									"        name = jsonData.FileCabinet[\"@attributes\"].Name;",
+									"    } else {",
+									"        id = jsonData.FileCabinet[0][\"@attributes\"].Id;",
+									"        name = jsonData.FileCabinet[0][\"@attributes\"].Name;",
+									"    }",
+									"    ",
+									"    postman.setEnvironmentVariable(\"DW_FileCabinet_FirstID\", id);",
+									"    postman.setEnvironmentVariable(\"DW_FileCabinet_FirstName\", name);",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/test/filecabinets/getall.php",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"test",
+								"filecabinets",
+								"getall.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get GUID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9b6b2181-44ee-4375-ad76-1b02abd5306d",
+								"exec": [
+									"pm.test(\"Response successful\", function () {",
+									"    pm.response.to.be.success",
+									"});",
+									"",
+									"pm.test(\"Content-Type is json\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\", \"text/plain;charset=UTF-8\");",
+									"});",
+									"",
+									"pm.test(\"Response has body\", function () {",
+									"    pm.response.to.have.body();",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/test/filecabinets/getguid.php?name={{DW_FileCabinet_FirstName}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"test",
+								"filecabinets",
+								"getguid.php"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "{{DW_FileCabinet_FirstName}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9b6b2181-44ee-4375-ad76-1b02abd5306d",
+								"exec": [
+									"pm.test(\"Response successful\", function () {",
+									"    pm.response.to.be.success",
+									"});",
+									"",
+									"pm.test(\"Content-Type is json\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\", \"text/plain;charset=UTF-8\");",
+									"});",
+									"",
+									"pm.test(\"Response has body\", function () {",
+									"    pm.response.to.have.body();",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/test/filecabinets/getname.php?id={{DW_FileCabinet_FirstID}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"test",
+								"filecabinets",
+								"getname.php"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{DW_FileCabinet_FirstID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Info By Name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9b6b2181-44ee-4375-ad76-1b02abd5306d",
+								"exec": [
+									"pm.test(\"Response successful\", function () {",
+									"    pm.response.to.be.success",
+									"});",
+									"",
+									"pm.test(\"Content-Type is json\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\", \"application/json\");",
+									"});",
+									"",
+									"pm.test(\"Response has body\", function () {",
+									"    pm.response.to.have.body();",
+									"})",
+									"",
+									"pm.test(\"Response data is correct\", function () {",
+									"    pm.response.to.have.jsonBody(\"@attributes\");",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/test/filecabinets/getinfo.php?parmtype=Name&parmval={{DW_FileCabinet_FirstName}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"test",
+								"filecabinets",
+								"getinfo.php"
+							],
+							"query": [
+								{
+									"key": "parmtype",
+									"value": "Name"
+								},
+								{
+									"key": "parmval",
+									"value": "{{DW_FileCabinet_FirstName}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Info By ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9b6b2181-44ee-4375-ad76-1b02abd5306d",
+								"exec": [
+									"pm.test(\"Response successful\", function () {",
+									"    pm.response.to.be.success",
+									"});",
+									"",
+									"pm.test(\"Content-Type is json\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\", \"application/json\");",
+									"});",
+									"",
+									"pm.test(\"Response has body\", function () {",
+									"    pm.response.to.have.body();",
+									"})",
+									"",
+									"pm.test(\"Response data is correct\", function () {",
+									"    pm.response.to.have.jsonBody(\"@attributes\");",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/test/filecabinets/getinfo.php?parmtype=Id&parmval={{DW_FileCabinet_FirstID}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"test",
+								"filecabinets",
+								"getinfo.php"
+							],
+							"query": [
+								{
+									"key": "parmtype",
+									"value": "Id"
+								},
+								{
+									"key": "parmval",
+									"value": "{{DW_FileCabinet_FirstID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "admin",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "admin",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "f7424816-1019-4a65-a557-761a1487d372",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "478ac035-1431-4b31-884e-64c1b13d97f6",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "56449071-dc74-4b3b-9a47-0ce8e747accb",
+			"key": "organization",
+			"value": "ComDoc, Inc. - Akron",
+			"type": "string"
+		}
+	]
+}
