@@ -53,8 +53,6 @@ trait Common
             foreach ($namespaces as $namespace => $label){
 
                 foreach($xml->children($namespace, true) as $child) {
-
-                    error_log(print_r($child, true));
                     
                     $xml->addChild($label, $child);
 

@@ -31,7 +31,6 @@ header("Content-Type: text/html");
   <div class="row">
     <div id="fields" class="col-sm-6">
       <button id="search" class="btn btn-primary btn-block">Search</button>
-
     <form class="form-inline" id="dwSearch">
     <?php
 
@@ -154,7 +153,6 @@ header("Content-Type: text/html");
        }
        $("#search").click();
      });
-
   });
 
   $("#search").click(function(){

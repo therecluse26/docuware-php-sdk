@@ -3,8 +3,8 @@ namespace DocuWare;
 
 /**
  * Basic DocuWare platform object.
-* Define specific object-related
-* callers here
+ * Define specific object-related
+ * callers here
  * @property mixed Document
  * @property mixed FileCabinet
  * @property mixed Account
