@@ -1,5 +1,5 @@
 {
-  "name": "comdocanalysts/docuware-php-sdk",
+  "name": "docuware-php-sdk",
   "autoload": {
     "psr-4": {
       "DocuWare\\": "src/DocuWare"
