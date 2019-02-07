@@ -57,7 +57,7 @@ class Utility
     {
         $formatted = array();
         foreach ($formData as $field) {
-            if ($field['value'] != "") {
+            if ($field['value'] !== "") {
                 $formatted[$field['name']] = $field['value'];
             }
 
