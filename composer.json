@@ -1,5 +1,5 @@
 {
-  "name": "comdocanalysts/docuware-php-sdk",
+  "name": "therecluse26/docuware-php-sdk",
   "version": "0.2.19",
   "autoload": {
     "psr-4": {
