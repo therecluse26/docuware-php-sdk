@@ -26,8 +26,11 @@ class Fields
      */
     private function validateField($value, $type)
     {
+        // if ($type == 'Table') {
+        //     return is_array($value);
+        // }
         if (array_key_exists($type, $this->fieldTypes)) {
-            if ($type == 'Keywords') {
+            if ($type == 'Keywords' || $type == 'Table') {
                 return is_array($value);
             } else {
                 return preg_match('/^' . $this->fieldTypes[$type]['regex'] . '$/', $value);
@@ -48,6 +51,7 @@ class Fields
      */
     public function addField($name, $value, $type)
     {
+     
         if ($this->validateField($value, $type)) {
             switch ($type) {
                 case 'Keywords':
@@ -82,8 +86,30 @@ class Fields
             $name = $field['Name'];
             $value = $field['Value'];
             $type = $field['Type'];
-
-            if ($this->validateField($value, $type)) {
+            if ($type == 'Table') {
+                $data = array();
+                foreach($value as $l){
+                    $line = array();
+                    foreach($l as $key=>$e){
+                        array_push($line, [
+                            'FieldName' => $key,
+                            'Item' => $e,
+                            'ItemElementName' => "string"
+                        ]);                
+                    }
+                    array_push($data,['ColumnValue'=> $line]);
+                }
+                array_push($this->fields['Fields'], [
+                    'FieldName' => $name,
+                    'Item' => [ 
+                        '$type' => "DocumentIndexFieldTable",
+                        "Row" => $data,
+                    ],
+                    'ItemElementName' => $type
+                ]);
+                // print_r($this->fields);
+            }   
+            else if ($this->validateField($value, $type)) {
                 switch ($type) {
                     case 'Keywords':
                         $itemValue['Keyword'] = $value;

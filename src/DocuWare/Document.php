@@ -101,29 +101,48 @@ class Document
      * @return string Returns XML document
      * @throws \Exception
      */
-    public function upload($fileCabinetId, $file, $fields, $pathParameters = null)
+    public function upload($fileCabinetId, $file, $fields, $pathParameters = null,$docId=null)
     {
+        $type = null;
         $path = "/FileCabinets/{$fileCabinetId}/Documents";
         $pathOptions = ['processTextshot' => ['required' => false],
                            'imageProcessing' => ['required' => false],
                            'redirect' => ['required' => false],
                            'storeDialogId' => ['required' => false],
                            'checkFileNameForCheckinInfo' => ['required' => false]];
-        $fileInfo = pathinfo($file);
         $boundary = md5(time());
 
         $content = "--".$boundary."\r\n" .
                    "Content-Disposition: attachment; filename=document.json; name=document\r\n" .
                    "Content-Type: application/json; charset=utf-8\r\n\r\n" .
                    $fields . "\r\n" .
-                   "--".$boundary . "\r\n" .
-                   "Content-Disposition: attachment; filename=\"" . $fileInfo['basename'] . "\"\r\n" .
+                   "--".$boundary . "\r\n";
+        if (empty($file)){
+            $content .= "Content-Disposition: attachment; filename=\"none\"\r\n" .
+                   "Content-Type: text/xml \r\n\r\n" .
+                   "--" . $boundary . "--\r\n";
+        }else{
+            $fileInfo = pathinfo($file);
+            $content .= "Content-Disposition: attachment; filename=\"" . $fileInfo['basename'] . "\"\r\n" .
                    "Content-Type: " . mime_content_type($file) . "\r\n\r\n" .
                    file_get_contents($file) . "\r\n" .
-                   "--" . $boundary . "--\r\n\r\n";
+                   "--" . $boundary . "--\r\n";
+        }
+        $content .= "\r\n";
+        if(!empty($docId)){
+            $path = "/FileCabinets/{$fileCabinetId}/Documents/{$docId}";
+        }
+
+        if (!empty($docId) && empty($file)){
+            $type = "application/json";
+            $path = "/FileCabinets/{$fileCabinetId}/Documents/{$docId}/Fields";
+            $content = str_replace('{"Fields":[{','{"Field":[{',$fields);  
+            //$content = '{"Field":[{"FieldName":"DOCUMENT_TYPE","Item":"Pedido Compra","ItemElementName":"String"},{"FieldName":"NIF_EMISOR","Item":"prueba2","ItemElementName":"String"},{"FieldName":"NUMERO_DEL_PEDIDO","Item":"3097","ItemElementName":"String"},{"FieldName":"FECHA_DE_EXPEDICION","Item":"2022-06-20","ItemElementName":"Date"},{"FieldName":"IMPORTE_NETO_TOTAL","Item":33.1,"ItemElementName":"Decimal"},{"FieldName":"IMPORTE_BRUTO","Item":33.1,"ItemElementName":"Decimal"}]}';
+            //error_log(print_r($content,true));                
+        }
 
         $url = $this->platform->buildURL($path, $pathOptions);
-        $result = $this->platform->postResource($url, $content, null, $boundary);
+        $result = $this->platform->postResource($url, $content, $type, $boundary);
 
         return $result;
     }
